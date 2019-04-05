@@ -2,11 +2,14 @@
 <!-- ngModel is directive ang word -->
 <mat-card>
   <mat-form-field>
-    <textarea matInput rows="6" [(ngModel)]="enteredValue"></textarea>
+    <input matInput type="text" [(ngModel)]="enteredTitle" />
   </mat-form-field>
-  <hr>
+  <mat-form-field>
+    <textarea matInput rows="6" [(ngModel)]="enteredContent"></textarea>
+  </mat-form-field>
+  <hr />
   <button mat-raised-button color="accent" (click)="onAddPost()">
     Save Post
   </button>
 </mat-card>
-<p>{{ newPost }}</p>
+<!-- <p>{{ newPost }}</p> -->
