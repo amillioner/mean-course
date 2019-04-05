@@ -1,15 +1,17 @@
 <!-- <textarea rows="6" [value]="newPost" #postInput></textarea> -->
 <!-- ngModel is directive ang word -->
 <mat-card>
-  <mat-form-field>
-    <input matInput type="text" [(ngModel)]="enteredTitle" />
-  </mat-form-field>
-  <mat-form-field>
-    <textarea matInput rows="6" [(ngModel)]="enteredContent"></textarea>
-  </mat-form-field>
-  <hr />
-  <button mat-raised-button color="accent" (click)="onAddPost()">
-    Save Post
-  </button>
+  <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+    <mat-form-field>
+      <input matInput type="text" name="title" ngModel required />
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput rows="6" name="content" ngModel required></textarea>
+    </mat-form-field>
+    <hr />
+    <button mat-raised-button color="accent" name="submit">
+      Save Post
+    </button>
+  </form>
 </mat-card>
 <!-- <p>{{ newPost }}</p> -->
