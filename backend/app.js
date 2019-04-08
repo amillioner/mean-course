@@ -48,8 +48,20 @@ app.post("/api/posts", (req, res, next) => {
   });
 });
 
+app.delete("/api/posts:id", (req, res, next) => {
+  console.log(req.params.id);
+  res.status(200).json({ message: "Post Deleted." });
+});
+
 app.use("/api/posts", (req, res, next) => {
-  const post = PostTable.find();
+  PostTable.find().then(docs => {
+    console.log(docs);
+    res.status(200).json({
+      message: "Posts fetched successfully!",
+      posts: docs
+    });
+  });
+
   // const posts = [
   //   {
   //     id: "asdf2345asd",
@@ -62,10 +74,6 @@ app.use("/api/posts", (req, res, next) => {
   //     content: "This is coming from the server!"
   //   }
   // ];
-  res.status(200).json({
-    message: "Posts fetched successful!",
-    posts: posts
-  });
 });
 
 module.exports = app;

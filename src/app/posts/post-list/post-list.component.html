@@ -7,7 +7,7 @@
   </mat-expansion-panel>
   <mat-action-row>
     <button mat-button color="primary">EDIT</button>
-    <button mat-button color="warn">DELETE</button>
+    <button mat-button color="warn" (click)="onDelete(p.id)">DELETE</button>
   </mat-action-row>
 </mat-accordion>
 <p class="info-text mat-body-1" *ngIf="posts.length <= 0">
