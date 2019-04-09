@@ -1,6 +1,5 @@
 const express = require("express");
 const PostTable = require("../models/post");
-const Post = require("../models/post");
 
 const router = express.Router();
 
@@ -20,7 +19,7 @@ router.post("", (req, res, next) => {
   });
 });
 
-router.delete(":id", (req, res, next) => {
+router.delete("/:id", (req, res, next) => {
   console.log(req.params.id);
   const posts = PostTable.deleteOne({
     _id: req.params.id
@@ -30,8 +29,8 @@ router.delete(":id", (req, res, next) => {
   res.status(200).json({ message: "Post Deleted." });
 });
 
-router.put(":id", (req, res, next) => {
-  const post = new Post({
+router.put("/:id", (req, res, next) => {
+  const post = new PostTable({
     _id: req.body.id,
     title: req.body.title,
     content: req.body.content
@@ -51,7 +50,7 @@ router.use("", (req, res, next) => {
     });
   });
 
-  router.get(":id", (req, res, next) => {
+  router.get("/:id", (req, res, next) => {
     PostTable.findById(req.params.id).then(post => {
       if (post) {
         res.status(200).json(post);
