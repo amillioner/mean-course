@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const PostTable = require("./models/post");
+const postsRoutes = require("./routes/posts");
 
 const app = express();
 
@@ -30,70 +30,20 @@ app.use((req, res, next) => {
   );
   next();
 });
-// app.use((req, res, next) => {
-//   console.log("First middleweare");
-//   next();
-// });
 
-app.post("/api/posts", (req, res, next) => {
-  // const post = req.body;
-  const post = new PostTable({
-    title: req.body.title,
-    content: req.body.content
-  });
-  // console.log(post);
-  post.save().then(createdPost => {
-    console.log(createdPost);
-    res.status(201).json({
-      message: "Post added successfully.",
-      postId: createdPost._id
-    });
-  });
-});
+app.use("/api/posts", postsRoutes);
 
-app.delete("/api/posts/:id", (req, res, next) => {
-  console.log(req.params.id);
-  const posts = PostTable.deleteOne({
-    _id: req.params.id
-  }).then(result => {
-    console.log(result);
-  });
-  res.status(200).json({ message: "Post Deleted." });
-});
-
-app.put("/api/posts/:id", (req, res, next) => {
-  const post = new Post({
-    _id: req.body.id,
-    title: req.body.tit,
-    content: req.body.content
-  });
-  PostTable.updateOne({ _id: req.params.id }, post).then(result => {
-    console.log(result);
-    res.status(200).json({ message: "Update successful." });
-  });
-});
-
-app.use("/api/posts", (req, res, next) => {
-  PostTable.find().then(docs => {
-    console.log(docs);
-    res.status(200).json({
-      message: "Posts fetched successfully!",
-      posts: docs
-    });
-  });
-
-  // const posts = [
-  //   {
-  //     id: "asdf2345asd",
-  //     title: "First server side post",
-  //     content: "This is coming from the server"
-  //   },
-  //   {
-  //     id: "asdf2345asd",
-  //     title: "First server side post----",
-  //     content: "This is coming from the server!"
-  //   }
-  // ];
-});
+// const posts = [
+//   {
+//     id: "asdf2345asd",
+//     title: "First server side post",
+//     content: "This is coming from the server"
+//   },
+//   {
+//     id: "asdf2345asd",
+//     title: "First server side post----",
+//     content: "This is coming from the server!"
+//   }
+// ];
 
 module.exports = app;
