@@ -1,9 +1,8 @@
-// import { Component, EventEmitter, Output } from "@angular/core";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-// import { Post } from "../post.model";
-import { PostsService } from "../posts.service";
 import { ActivatedRoute, ParamMap } from "@angular/router";
+import { PostsService } from "../posts.service";
+
 import { Post } from "../post.model";
 
 @Component({

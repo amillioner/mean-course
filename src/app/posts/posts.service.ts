@@ -40,7 +40,7 @@ export class PostsService {
   getPost(id: string) {
     // return { ...this.posts.find(p => p.id === id) };
     return this.http.get<{ _id: string; title: string; content: string }>(
-      "http://localhost:3000/api/posts" + id
+      "http://localhost:3000/api/posts/" + id
     );
   }
 
@@ -48,7 +48,7 @@ export class PostsService {
     const post: Post = { id: null, title: title, content: content };
     this.http
       .post<{ message: string; postId: string }>(
-        "http://localhost:3000/api/posts",
+        "http://localhost:3000/api/posts/",
         post
       )
       .subscribe(res => {
